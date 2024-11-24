@@ -1,0 +1,38 @@
+version: '3.3'
+
+services:
+  marketing:
+    build:
+      context: ./marketing
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    restart: always
+    image: ash0semlali/marketing
+
+  auth:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    restart: always
+    image: ash0semlali/auth
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    restart: always
+    image: ash0semlali/dashboard
+
+  container:
+    build:
+      context: ./container
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8088"
+    restart: always
+    image: ash0semlali/container

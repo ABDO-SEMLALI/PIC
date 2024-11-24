@@ -1,0 +1,120 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-deployment
+  template:
+    metadata:
+      labels:
+        app: auth-deployment
+    spec:
+      containers:
+      - name: auth-container
+        image: ash0semlali/auth:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-deployment
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: auth-deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marketing-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: marketing-deployment
+  template:
+    metadata:
+      labels:
+        app: marketing-deployment
+    spec:
+      containers:
+      - name: marketing-container
+        image: ash0semlali/marketing:latest
+        ports:
+        - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: marketing-deployment
+spec:
+  ports:
+  - port: 8081
+  selector:
+    app: marketing-deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard-deployment
+  template:
+    metadata:
+      labels:
+        app: dashboard-deployment
+    spec:
+      containers:
+      - name: dashboard-container
+        image: ash0semlali/dashboard:latest
+        ports:
+        - containerPort: 8083
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-deployment
+spec:
+  ports:
+  - port: 8083
+  selector:
+    app: dashboard-deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container-deployment
+  template:
+    metadata:
+      labels:
+        app: container-deployment
+    spec:
+      containers:
+      - name: container-container
+        image: ash0semlali/container:latest
+        ports:
+        - containerPort: 8005
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: container-deployment
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8005
+  selector:
+    app: container-deployment
